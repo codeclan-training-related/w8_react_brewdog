@@ -1,11 +1,12 @@
-//step1: import hooks
-//step2: make component
 import React, { useState, useEffect } from 'react';
+import BeerRandom from '../components/BeerRandom';
+import BeerInfo from '../components/BeerInfo';
+import WishList from '../components/WishList';
 
 const BeerContainer = () => {
-  const [beer, setBeer] = useState([]);
-  const [selectedBeer, setSelectedBeer] = useState(null);
+  const [beer, setBeer] = useState(null);
   const [showInfo, setShowInfo] = useState(false);
+  const [selectedBeers, setSelectedBeers] = useState([]);
 
   useEffect(() => {
     getBeer();
@@ -15,63 +16,32 @@ const BeerContainer = () => {
     fetch('https://api.punkapi.com/v2/beers/random')
       .then(res => res.json())
       .then(data => {
-        setBeer(data);
-        setShowInfo(false);
+        setBeer(data[0]);
       });
   }
-
-  const showBeer = () => {
-    if (beer.length > 0) {
-      return (
-        <>
-          <p>{beer[0].name}</p>
-          <img src={beer[0].image_url} alt={beer[0].name} style={{ width: '200px', height: '300px' }} />
-        </>
-      )
-    } else {
-      return null;
-    }
-  };
-
-  const showFoodPairing = () => {
-    if (beer.length > 0) {
-      return beer[0].food_pairing.map((item) => (
-        <p>{item}</p>
-      ));
-    } else {
-      return null;
-    }
-  };
 
   const showMore = () => {
     setShowInfo(prevState => !prevState);
   }
 
-  const getBeerInfo = () => {
-    if (beer.length > 0 && showInfo) {
-      return (
-        <>
-          <p>Name: {beer[0].name}</p>
-          <p>Abv: {beer[0].abv}</p>
-          <p>Description: {beer[0].description}</p>
-          <div>Food Pairing: {showFoodPairing()}</div>
-        </>
-      )
-    } else {
-      return null;
-    }
+  const saveSelected = () => {
+    setSelectedBeers([...selectedBeers, beer]);
   }
 
   return (
-    <div className="main-container">
-      <p>This is the main page</p>
-      <button className='beer-select' onClick={getBeer}>Click Me</button>
-      <button className='beer-info' onClick={showMore}>
-        {showInfo ? 'Hide Info' : 'More Info'}
-      </button>
-      {showBeer()}
-      {getBeerInfo()}
-    </div>
+    <>
+      <div className="main-container">
+        <button className='beer-select' onClick={getBeer}>Any Beer</button>
+        <button className='beer-info' onClick={showMore}>
+          {showInfo ? 'Hide Info' : 'More Info'}
+        </button>
+        <button className='beer-save' onClick={saveSelected}>Save</button>
+        <BeerRandom beer={beer} />
+        <BeerInfo beer={beer} showInfo={showInfo} />
+      
+        {selectedBeers ? <WishList selectedBeers={selectedBeers} /> : null}
+      </div>
+    </>
   )
 };
 
