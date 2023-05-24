@@ -1,5 +1,6 @@
-import BeerContainer from './containers/BeerContainer';
 import React from 'react';
+import BeerContainer from './containers/BeerContainer';
+import './App.css';
 
 function App() {
   return (
