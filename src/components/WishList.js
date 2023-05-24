@@ -9,7 +9,7 @@ const WishList = ({ selectedBeers, removeBeer }) => {
   ));
 
   return (
-    <div className="wishlist">
+    <div>
     <ul >
       {items}
     </ul>
