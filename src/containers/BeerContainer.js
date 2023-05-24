@@ -23,10 +23,13 @@ const BeerContainer = () => {
   const showMore = () => {
     setShowInfo(prevState => !prevState);
   }
-
   const saveSelected = () => {
-    setSelectedBeers([...selectedBeers, beer]);
-  }
+    const isNewBeer = selectedBeers.some((selectedBeer) => selectedBeer.id === beer.id);
+    if (!isNewBeer) {
+      setSelectedBeers([...selectedBeers, beer]);
+    }
+  };
+  
 
   const removeBeer = (beerId) => {
     setSelectedBeers(prevState => prevState.filter(beer => beer.id !== beerId));
@@ -40,6 +43,7 @@ const BeerContainer = () => {
           {showInfo ? 'Hide Info' : 'More Info'}
         </button>
         <button className='beer-save' onClick={saveSelected}>Save</button>
+
         <BeerRandom beer={beer} />
         <BeerInfo beer={beer} showInfo={showInfo} />
         {selectedBeers ? <WishList selectedBeers={selectedBeers} removeBeer={removeBeer} /> : null}

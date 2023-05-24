@@ -5,8 +5,8 @@ const ListItem = ({ beer, removeBeer }) => {
     <li>
       <div className='listItem' value={beer.id}>
         <p>Name: {beer.name}</p>
-        <img src={beer.image_url} alt={beer.name} style={{ width: '100px', height: '150px' }} />
-        <button onClick={() => removeBeer(beer.id)}>Remove</button>
+        <img src={beer.image_url} alt={beer.name} />
+        <button  onClick={() => removeBeer(beer.id)}>Remove</button>
       </div>
     </li>
   );

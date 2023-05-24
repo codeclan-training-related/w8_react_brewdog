@@ -1,5 +1,7 @@
 import React from "react";
 import ListItem from "./ListItem";
+import './WishList.css';
+
 
 const WishList = ({ selectedBeers, removeBeer }) => {
   const items = selectedBeers.map((beer) => (
@@ -7,9 +9,11 @@ const WishList = ({ selectedBeers, removeBeer }) => {
   ));
 
   return (
-    <ul>
+    <div className="wishlist">
+    <ul >
       {items}
     </ul>
+    </div>
   );
 };
 
