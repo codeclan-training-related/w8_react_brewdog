@@ -1,9 +1,9 @@
 import React from "react";
 import './Home.css';
-
+import WishList from "./WishList";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = ( {selectedBeers, removeBeer}) => {
   return (
     <div className="homePage">
       <div className="surpriseMe">
@@ -15,9 +15,10 @@ const Home = () => {
       <div className="helpMe">
         <h2>Help Me</h2>
         <button className="filterbeer">
-          <Link to="/filterBeer">💟</Link>
+        <Link to="/help">💟</Link>
         </button>
       </div>
+      {/* <WishList selectedBeers={selectedBeers} removeBeer={removeBeer} />  */}
     </div>
   );
 }
