@@ -17,7 +17,7 @@ const WishList = ({ filteredBeers, savedBeerIds, removeBeer,showMore,showInfo })
     {showInfo ? 'Hide Info' : 'More Info'}
   </button>
 
-  {showInfo && <BeerInfo beer={beer} showInfo={showInfo} />}
+             {showInfo && <BeerInfo beer={beer} showInfo={showInfo} />}
             </li>
           ))}
       </ul>
