@@ -11,7 +11,16 @@ const BeerRandom = ({ beer, getBeer, showMore, saveSelected, showInfo, isSaved }
             <button className="beer-select" onClick={getBeer}>
               Any Beer
             </button>
-            <Buttons showMore={()=>{showMore(beer.id)}} saveSelected={()=>saveSelected(beer.id)} showInfo={showInfo} isSaved={isSaved} />
+            <Buttons
+            beer={beer}
+  showMore={() => showMore(beer.id)}
+  saveSelect={()=>saveSelected(beer.id)}
+  showInfo={showInfo}
+  isSaved={isSaved}
+  
+/>
+
+           
           </div>
           <div>
             <p >{beer.name}</p>
@@ -24,4 +33,4 @@ const BeerRandom = ({ beer, getBeer, showMore, saveSelected, showInfo, isSaved }
   );
 };
 
-export default BeerRandom;
+export default BeerRandom; 

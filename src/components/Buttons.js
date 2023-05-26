@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Buttons = ({ showMore, saveSelected, showInfo, isSaved }) => {
+const Buttons = ({ beer, showMore, saveSelected, showInfo, isSaved }) => {
   const [buttonSaveText, setButtonSaveText] = useState(isSaved ? 'Saved' : 'Save');
   const [buttonInfoText, setButtonInfoText] = useState(showInfo ? 'Hide Info' : 'More Info');
 
@@ -10,7 +10,7 @@ const Buttons = ({ showMore, saveSelected, showInfo, isSaved }) => {
   };
 
   const handleInfoButton = () => {
-    const newShowInfo = showMore();
+    showMore();
     setButtonInfoText(prevText => prevText === 'More Info' ? 'Hide Info' : 'More Info');
   };
 

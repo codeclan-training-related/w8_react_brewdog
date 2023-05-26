@@ -30,7 +30,7 @@ function App() {
     Promise.all(promises).then((data)=>{
       const combinedResponses=data.flat();
       setAllBeers(combinedResponses);
-      setIsSaved(false);
+      // setIsSaved(false);
   
       })};
     
@@ -40,7 +40,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setBeer(data[0]);
-        setIsSaved(false);
+        // setIsSaved(false);
       });
   };
   
@@ -65,13 +65,17 @@ function App() {
       const selectedBeer = allBeers.find((beer) => beer.id === beerId);
       const isNewBeer = selectedBeers.some((selectedBeer) => selectedBeer.id === beerId);
       const changeSaveButton=()=>{
-        isNewBeer?setIsSaved(true):setIsSaved(false);
-      }
+        isNewBeer?setIsSaved(true):setIsSaved(false);}
+      
     
       if (!isNewBeer && selectedBeer) {
         setSelectedBeers([...selectedBeers, selectedBeer]);
+        // setIsSaved(prevState => !prevState)
+
         changeSaveButton();
       }
+      // setIsSaved(prevState => !prevState)
+
     };
 
 
@@ -132,4 +136,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
