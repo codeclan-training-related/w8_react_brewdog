@@ -9,6 +9,7 @@ import WishList from './components/WishList';
 import FilterBeer from './components/FilterBeer'
 import BeerRandom from './components/BeerRandom';
 import BeerInfo from './components/BeerInfo';
+import Buttons from './components/Buttons'; 
 
 
 
@@ -48,22 +49,32 @@ function App() {
   useEffect(()=>{getAllBeers()},[]);
 
 
-  console.log(`jjjjjj`)
+
+  const showMore = (beerId) => {
+   if(beerId!==null)
+   return(
+    setShowInfo((prevState) => !prevState))}
+
+
+ 
 
 
 
-  const showMore = () => {
-    setShowInfo((prevState) => !prevState);
-  };
 
-  const saveSelected = () => {
-    const isNewBeer = selectedBeers.some((selectedBeer) => selectedBeer.id === beer.id);
-    if (!isNewBeer) {
-      setSelectedBeers([...selectedBeers, beer]);
-      setIsSaved(true); 
-    }
+    const saveSelected = (beerId) => {
+      const selectedBeer = allBeers.find((beer) => beer.id === beerId);
+      const isNewBeer = selectedBeers.some((selectedBeer) => selectedBeer.id === beerId);
+      const changeSaveButton=()=>{
+        isNewBeer?setIsSaved(true):setIsSaved(false);
+      }
+    
+      if (!isNewBeer && selectedBeer) {
+        setSelectedBeers([...selectedBeers, selectedBeer]);
+        changeSaveButton();
+      }
+    };
 
-  };
+
   
   const removeBeer = (beerId) => {
     setSelectedBeers((prevState) => prevState.filter((beer) => beer.id !== beerId));
@@ -72,16 +83,13 @@ function App() {
 
   const handleInput = (food) => {
     const filteredBeers = allBeers.filter((beer) => {
-      return beer.food_pairing.some((beerFood) =>
-        beerFood.toLowerCase().includes(food.toLowerCase())
-      );
+      return beer.food_pairing.some((paired_food) => paired_food.toLowerCase().includes(food.toLowerCase()));
     });
   
     setFilteredBeers(filteredBeers);
   };
   
-
-
+  
 
 
   return (
@@ -107,12 +115,17 @@ function App() {
 
 
 
-     <Route path="/filterBeer" element={<FilterBeer allBeers={allBeers} handleInput={handleInput}filteredBeers={filteredBeers}/>} />
+     <Route path="/filterBeer" element={<FilterBeer allBeers={allBeers} handleInput={handleInput}filteredBeers={filteredBeers}  showMore={showMore} saveSelected={saveSelected} showInfo={showInfo} isSaved={isSaved} beer={beer} />} />
  
-          <Route
-            path="/wishlist"
-            element={selectedBeers ? <WishList selectedBeers={selectedBeers} removeBeer={removeBeer} /> : null}
-          />
+     <Route
+  path="/wishlist"
+  element={
+    selectedBeers ? (
+      <WishList filteredBeers={filteredBeers} savedBeerIds={selectedBeers.map((beer) => beer.id)} removeBeer={removeBeer} />
+    ) : null
+  }
+/>
+
         </Routes>
       </Router>
     </div>

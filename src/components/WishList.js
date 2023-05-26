@@ -1,51 +1,24 @@
-import React from "react";
-// import './WishList.css';
+import React from 'react';
+import BeerInfo from './BeerInfo';
 
-
-const WishList = ({ selectedBeers, removeBeer }) => {
-  const items = selectedBeers.map((beer) => {return (
-    <ul key={beer.id}>
-      <li className='listItem' value={beer.id}>
-        <p>Name: {beer.name}</p>
-        <img src={beer.image_url} alt={beer.name}  style={{ width: '100px', height: '200px' }} />
-        <button  onClick={() => removeBeer(beer.id)}>Remove</button>
-      </li>
-    </ul>
-  )})
-
+const WishList = ({ filteredBeers, savedBeerIds, removeBeer }) => {
   return (
-    <div>
-      {items}
-    </div>
+    <>
+      <h2>Wish List:</h2>
+      <ul>
+        {filteredBeers
+          .filter((beer) => savedBeerIds.includes(beer.id))
+          .map((beer) => (
+            <li key={beer.id} id={beer.id}>
+              {beer.name}
+              <img src={beer.image_url} alt={beer.name} style={{ width: '200px', height: '300px' }} />
+              <button onClick={() => removeBeer(beer.id)}>Remove</button>
+              <BeerInfo beer={beer} showInfo={false} />
+            </li>
+          ))}
+      </ul>
+    </>
   );
-  
 };
 
 export default WishList;
-
-//todo: add css on it
-// ul {
-//   display: flex;
-//   justify-content: space-around;
-// }
-
-// li {
-//   list-style: none;
-//   text-align: center;
-// }
-
-// .listItem {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   height: 200px;
-// }
-
-// .listItem img {
-//   width: 100px;
-//   height: 150px;
-// }
-
-// .listItem button {
-//   margin-top: 10px;
-// }
