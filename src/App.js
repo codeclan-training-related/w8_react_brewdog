@@ -121,7 +121,7 @@ function App() {
   path="/wishlist"
   element={
     selectedBeers ? (
-      <WishList filteredBeers={filteredBeers} savedBeerIds={selectedBeers.map((beer) => beer.id)} removeBeer={removeBeer} />
+      <WishList filteredBeers={filteredBeers} savedBeerIds={selectedBeers.map((beer) => beer.id)} removeBeer={removeBeer} showMore={showMore} showInfo={showInfo}/>
     ) : null
   }
 />
