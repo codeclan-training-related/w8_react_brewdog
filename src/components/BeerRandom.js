@@ -1,8 +1,7 @@
 import React from 'react';
 import BeerInfo from './BeerInfo';
-import Buttons from './Buttons';
 
-const BeerRandom = ({ beer, getBeer, showMore, saveSelected, showInfo, isSaved }) => {
+const BeerRandom = ({ beer, getBeer, showMore, saveRandom, showInfo, isSaved,selectedBeers }) => {
   return (
     <>
       {beer && (
@@ -11,19 +10,13 @@ const BeerRandom = ({ beer, getBeer, showMore, saveSelected, showInfo, isSaved }
             <button className="beer-select" onClick={getBeer}>
               Any Beer
             </button>
-            <Buttons
-            beer={beer}
-  showMore={() => showMore(beer.id)}
-  saveSelect={()=>saveSelected(beer.id)}
-  showInfo={showInfo}
-  isSaved={isSaved}
-  
-/>
-
-           
+            <button className="beer-save" onClick={saveRandom}>
+              {isSaved ? 'Saved' : 'Save'}
+            </button>
+            
           </div>
           <div>
-            <p >{beer.name}</p>
+            <p>{beer.name}</p>
             <img src={beer.image_url} alt={beer.name} style={{ width: '200px', height: '300px' }} />
           </div>
           {showInfo && <BeerInfo beer={beer} showInfo={showInfo} />}
@@ -33,4 +26,4 @@ const BeerRandom = ({ beer, getBeer, showMore, saveSelected, showInfo, isSaved }
   );
 };
 
-export default BeerRandom; 
+export default BeerRandom;
